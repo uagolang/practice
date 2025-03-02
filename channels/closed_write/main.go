@@ -11,7 +11,7 @@ func main() {
 		ch <- 0
 	}()
 
-	// output here will be 'test' as expected
+	// output here will be '0' as expected
 	fmt.Printf("channel value before close: %v\n", <-ch)
 
 	go func() {
