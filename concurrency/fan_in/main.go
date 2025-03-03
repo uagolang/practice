@@ -6,8 +6,13 @@ import (
 	"time"
 )
 
+// main idea of that pattern is to merge
+// list of channels into resulting one
+
 func main() {
 	start := time.Now()
+
+	// init for example 4 channels
 	ch1, ch2, ch3, ch4 := make(chan int), make(chan int), make(chan int), make(chan int)
 
 	go func() {
@@ -26,19 +31,24 @@ func main() {
 		}
 	}()
 
-	for value := range join(ch1, ch2, ch3, ch4) {
+	// function merge returns channel
+	// and we can iterate over the channel
+	for value := range merge(ch1, ch2, ch3, ch4) {
 		fmt.Println("value:", value)
 	}
 
 	fmt.Println("done in", time.Now().Sub(start))
 }
 
-func join[T any](chs ...chan T) chan T {
+func merge[T any](chs ...chan T) chan T {
+	// we need wait group to sync goroutines
+	// and close result channel
 	var wg sync.WaitGroup
 	wg.Add(len(chs))
 
 	result := make(chan T)
 	for _, ch := range chs {
+		// wg.Add(1) could be here instead of line 47
 		go func() {
 			defer wg.Done()
 
@@ -48,10 +58,12 @@ func join[T any](chs ...chan T) chan T {
 		}()
 	}
 
+	// wait all groups to be done & close channel in background
 	go func() {
 		wg.Wait()
 		close(result)
 	}()
 
+	// returns channel immediately
 	return result
 }
