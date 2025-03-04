@@ -4,17 +4,21 @@ This repository contains practical examples of resolving challenge problems.
 
 ## Topics
 
-### Channels
+### Concurrency
+
+#### Channels
 
 - Write to closed channel
 - Read from closed channel
 
-### Concurrency
+#### Patterns
 
 - Semaphore
 - Fan-out
 - Fan-in
+- Tee
+- Pipeline
 
-### Structs
+### Fundamental
 
-- Alignment
+- Struct Alignment
