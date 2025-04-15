@@ -2,18 +2,20 @@
 
 This repository contains practical examples of resolving challenge problems.
 
-## Topics
+## Algo
 
-### Fundamental
+- String Reverse
+
+## Fundamental
 
 - Struct Alignment
 - Channels:
   - Write to closed channel
   - Read from closed channel
 
-### Patterns
+## Patterns
 
-#### Concurrency
+### Concurrency
 
 - Semaphore
 - Fan-out
